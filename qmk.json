@@ -4,10 +4,6 @@
         ["monsgeek/m1", "default"],
         ["redox/rev1/base", "default"],
         ["splitkb/kyria/rev1/base", "default"],
-<<<<<<< HEAD
-        ["xtips_x7s"]
-=======
-		["xtips_x7s"]
->>>>>>> ac90cca3bfeeaa7ebd6d143d517b45662a9643e6
+        ["xtips_x7s", "miryoku"]
     ]
 }

@@ -26,9 +26,9 @@ enum layers {
 
 /*set custom ketcode for mouse jiggler and others*/
 enum custom_keycodes {
-    JIGGLE = SAFE_RANGE,
-    QMKADDR,
+    QMKADDR = SAFE_RANGE,
     QMKMVGR,
+//    JIGGLE,
 };
 
 // Shortcut to make keymap more readable
@@ -44,6 +44,7 @@ enum custom_keycodes {
 #define KC_ADPU LT(_ADJUST, KC_PGUP)
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+/*  
   if (record->event.pressed) {
     static deferred_token token = INVALID_DEFERRED_TOKEN;
     static report_mouse_t report = {0};
@@ -72,6 +73,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       token = defer_exec(1, jiggler_callback, NULL);  // Schedule callback.
     }
   }
+*/
   
   // other macros
 	switch (keycode) {
@@ -124,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,JIGGLE  ,KC_MS_U ,XXXXXXX ,KC_WH_U ,XXXXXXX ,_______ ,                          _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
+     XXXXXXX ,XXXXXXX ,KC_MS_U ,XXXXXXX ,KC_WH_U ,XXXXXXX ,_______ ,                          _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D ,XXXXXXX ,_______ ,                          _______ ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RIGHT,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
