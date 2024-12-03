@@ -1,4 +1,8 @@
 {
-    "userspace_version": "1.0",
-    "build_targets": []
+    "userspace_version": "1.1",
+    "build_targets": [
+        ["monsgeek/m1", "default"],
+        ["redox/rev1/base", "default"],
+        ["splitkb/kyria/rev1/base", "default"]
+    ]
 }
