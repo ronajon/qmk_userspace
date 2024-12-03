@@ -28,7 +28,7 @@ enum __layers {
 enum custom_keycodes {
     QMKADDR = SAFE_RANGE,
     QMKMVGR,
-    JIGGLE,
+    JIGGLE, // FN - J
 };
 
 const key_override_t home_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_HOME, LSFT(KC_INS));
