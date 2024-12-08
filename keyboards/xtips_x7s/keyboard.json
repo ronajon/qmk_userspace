@@ -23,11 +23,6 @@
         "enabled": true,
         "handedness": {
             "pin": "B7"
-<<<<<<< HEAD
-        },
-=======
-        }
->>>>>>> 52f4f9533e346f611a92ced274273caed570d7cc
         "serial": {
             "driver": "usart",
             "pin": "B6"

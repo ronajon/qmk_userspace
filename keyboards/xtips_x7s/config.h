@@ -8,3 +8,6 @@
 /*#define WS2812_PWM_CHANNEL 1*/
 /*#define WS2812_PWM_DMA_STREAM STM32_DMA1_STREAM3*/
 /*#define WS2812_PWM_DMA_CHANNEL 3*/
+
+/* config max 64kb */
+#define STM32_FLASH_SECTORS_PER_BANK 64
