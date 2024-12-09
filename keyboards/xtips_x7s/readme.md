@@ -30,7 +30,8 @@ Enter the bootloader in 3 ways:
 ## Flashing
 
 * in rules.mk have EEPROM_DRIVER=transient 
-* use dso138_boot20.bin to flash both halves
+
+use dso138_boot20.bin to flash both halves
 
     sudo st-flash --reset --format binary write ~/Downloads/dso138_boot20.bin 0x08000000
 
