@@ -31,11 +31,14 @@ Enter the bootloader in 3 ways:
 
 * in rules.mk have EEPROM_DRIVER=transient 
 * use dso138_boot20.bin to flash both halves
+
     sudo st-flash --reset --format binary write ~/Downloads/dso138_boot20.bin 0x08000000
 
-* only build miryoku keymap, default is not working
+only build miryoku keymap, default is not working
+
     make clean xtips_x7s:miryoku
 
-* after flashing dso138_boot20.bin, put boards in bootloader with W and O keys
+after flashing dso138_boot20.bin, put boards in bootloader with W and O keys
+
     flash with qmk flash xtips_x7s_miryoku.bin
 
