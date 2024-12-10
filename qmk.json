@@ -4,6 +4,6 @@
         ["monsgeek/m1", "default"],
         ["redox/rev1/base", "default"],
         ["splitkb/kyria/rev1/base", "default"],
-        ["xtips_x7s", "miryoku"]
+        ["xtips_x7s", "mymap"]
     ]
 }
