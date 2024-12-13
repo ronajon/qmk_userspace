@@ -18,6 +18,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [1] = LAYOUT(
+<<<<<<< HEAD
         QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ KC_AGIN, KC_UNDO, LSFT(KC_INS),  XXXXXXX, KC_PSCR,
         KC_LGUI, KC_LALT,    KC_LCTL,    KC_LSFT,    XXXXXXX, /*||*/ KC_CAPS, KC_LEFT, KC_UP, KC_DOWN,   KC_RGHT,
         XXXXXXX, LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), XXXXXXX, /*||*/ KC_INS,  KC_HOME, KC_PGUP, KC_PGDN, KC_END,
@@ -62,6 +63,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SCRL, /*||*/ XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
         KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT, XXXXXXX,
                           KC_APP,  KC_SPC,  KC_TAB,  /*||*/ XXXXXXX, XXXXXXX, XXXXXXX
+=======
+        QK_BOOT,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  KC_AGIN,      KC_UNDO,       LSFT(KC_INS), XXXXXXX,        KC_PSCR,
+        KC_LGUI,      KC_LALT,      KC_LCTL,      KC_LSFT,      XXXXXXX,       /*||*/  KC_CAPS,      KC_LEFT,       KC_UP,        KC_DOWN,        KC_RGHT,
+        XXXXXXX,      LCTL(KC_X),   LCTL(KC_C),   LCTL(KC_V),   XXXXXXX,       /*||*/  KC_INS,       KC_HOME,       KC_PGUP,      KC_PGDN,        KC_END,
+                                    XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  KC_ENT,       KC_BSPC,       KC_DEL                        
+    ),                                                                                                                                            
+																																		          
+    [2] = LAYOUT(                                                                                                                                 
+        /*            alt,           ctrl,         shift                                                     m      ouse                                      */
+        XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
+        KC_LGUI,      KC_LALT,      KC_LCTL,      KC_LSFT,      XXXXXXX,       /*||*/  XXXXXXX,      MS_LEFT,       MS_UP,        MS_DOWN,        MS_RGHT,
+        XXXXXXX,      KC_RALT,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  XXXXXXX,      MS_WHLL,       MS_WHLU,      MS_WHLD,        MS_WHLR,
+                                    XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  MS_BTN2,      MS_BTN1,       MS_BTN3                       
+    ),                                                                                                                                            
+																																		          
+    [3] = LAYOUT(                                                                                                                                 
+        XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
+        /*                                                                                           prev,          volup,        voldown,        next  */
+        KC_LGUI,      KC_LALT,      KC_LCTL,      KC_LSFT,      XXXXXXX,       /*||*/  XXXXXXX,      KC_MPRV,       KC_VOLU,      KC_VOLD,        KC_MNXT,
+        XXXXXXX,      KC_RALT,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
+        /*                                                                              stop, pl     ay, mute                                           */
+                                    XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  KC_MSTP,      KC_MPLY,       AU_TOGG                       
+    ),                                                                                                                                            
+																																		          
+    [4] = LAYOUT(                                                                                                                                 
+        /* numeri     c keys */                                                                                                                   
+        KC_LBRC,      KC_7,         KC_8,         KC_9,         KC_RBRC,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
+        KC_SCLN,      KC_4,         KC_5,         KC_6,         KC_EQL,        /*||*/  XXXXXXX,      KC_LSFT,       KC_LCTL,      KC_LALT,        KC_LGUI,
+        KC_GRV,       KC_1,         KC_2,         KC_3,         KC_BSLS,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,       KC_RALT,        XXXXXXX,
+                                    KC_DOT,       KC_0,         KC_MINS,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX                       
+    ),                                                                                                                                            
+																																		          
+    [5] = LAYOUT(                                                                                                                                 
+        KC_LCBR,      KC_AMPR,      KC_ASTR,      KC_LPRN,      KC_RCBR,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
+        KC_COLN,      KC_DLR,       KC_PERC,      KC_CIRC,      KC_PLUS,       /*||*/  XXXXXXX,      KC_LSFT,       KC_LCTL,      KC_LALT,        KC_LGUI,
+        KC_TILD,      KC_EXLM,      KC_AT,        KC_HASH,      KC_PIPE,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      KC_RALT,        XXXXXXX,
+                                    KC_LPRN,      KC_RPRN,      KC_UNDS,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX                       
+    ),                                                                                                                                            
+																																		          
+    [6] = LAYOUT(                                                                                                                                 
+        /* function keys */                                                                                                                       
+        KC_F12,       KC_F7,        KC_F8,        KC_F9,        KC_PSCR,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
+        KC_F11,       KC_F4,        KC_F5,        KC_F6,        KC_SCRL,       /*||*/  XXXXXXX,      KC_LSFT,       KC_LCTL,      KC_LALT,        KC_LGUI,
+        KC_F10,       KC_F1,        KC_F2,        KC_F3,        KC_PAUS,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      KC_RALT,        XXXXXXX,
+                                    KC_APP,       KC_SPC,       KC_TAB,        /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX
+>>>>>>> ea3e5a69e7e3e4c67fbc855b8b3c1e4821be5321
     )
 
 };
