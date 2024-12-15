@@ -1,5 +1,9 @@
 #pragma once
 
+/* config max 64kb */
+#define STM32_FLASH_SECTORS_PER_BANK 64
+
+// from miryoku
 // default but used in macros
 #undef TAPPING_TERM
 #define TAPPING_TERM 200
@@ -28,5 +32,3 @@
 #undef MOUSEKEY_TIME_TO_MAX
 #define MOUSEKEY_TIME_TO_MAX    64
 
-/* config max 64kb */
-#define STM32_FLASH_SECTORS_PER_BANK 64
