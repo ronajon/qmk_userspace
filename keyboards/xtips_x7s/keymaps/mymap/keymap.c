@@ -1,7 +1,19 @@
 #include QMK_KEYBOARD_H
 #if __has_include("keymap.h")
-#    include "keymap.h"
+#  include "keymap.h"
 #endif
+
+enum __layers {
+  BASE,
+  NAV,
+  MOUSE,
+  BUTTON,
+  MEDIA,
+  NUM,
+  SYM,
+  FUN,
+  ADD
+};
 
 
 /* THIS FILE WAS GENERATED!
@@ -10,59 +22,76 @@
  * edit it directly.
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT(
-        KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,          /*||*/  KC_Y,         KC_U,          KC_I,         KC_O,           KC_P,
-        LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,          /*||*/  KC_H,         LSFT_T(KC_J),  LCTL_T(KC_K), LALT_T(KC_L),   LGUI_T(KC_SCLN),
-        KC_Z,         RALT_T(KC_X), KC_C,         KC_V,         KC_B,          /*||*/  KC_N,         KC_M,          KC_COMM,      RALT_T(KC_DOT), KC_SLSH,
-                                    LT(3,KC_ESC), LT(1,KC_SPC), LT(2,KC_TAB),  /*||*/  LT(5,KC_ENT), LT(4,KC_BSPC), LT(6,KC_DEL)
-    ),
+  [BASE] = LAYOUT(
+  KC_Q,  KC_W,  KC_E,  KC_R,  KC_T,   /*||*/ KC_Y,  KC_U,   KC_I,  KC_O,   KC_P,
+  LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,   /*||*/ KC_H,  LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L),  LGUI_T(KC_SCLN),
+  LT(MO(BUTTON),KC_Z),  RALT_T(KC_X), KC_C,  KC_V,  KC_B,   /*||*/ KC_N,  KC_M,   KC_COMM, RALT_T(KC_DOT), LT(MO(BUTTON),KC_SLSH),
+   LT(MO(MEDIA),KC_ESC), LT(MO(NAV),KC_SPC), LT(MO(MOUSE),KC_TAB), /*||*/ LT(MO(SYM),KC_ENT), LT(MO(NUM),KC_BSPC), LT(MO(FUN),KC_DEL)
+  ),
 
-    [1] = LAYOUT(
-        QK_BOOT,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  KC_AGIN,      KC_UNDO,       LSFT(KC_INS), XXXXXXX,        KC_PSCR,
-        KC_LGUI,      KC_LALT,      KC_LCTL,      KC_LSFT,      XXXXXXX,       /*||*/  KC_CAPS,      KC_LEFT,       KC_UP,        KC_DOWN,        KC_RGHT,
-        XXXXXXX,      LCTL(KC_X),   LCTL(KC_C),   LCTL(KC_V),   XXXXXXX,       /*||*/  KC_INS,       KC_HOME,       KC_PGUP,      KC_PGDN,        KC_END,
-                                    XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  KC_ENT,       KC_BSPC,       KC_DEL                        
-    ),                                                                                                                                            
-																																		          
-    [2] = LAYOUT(                                                                                                                                 
-        /*            alt,           ctrl,         shift                                                     m      ouse                                      */
-        XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
-        KC_LGUI,      KC_LALT,      KC_LCTL,      KC_LSFT,      XXXXXXX,       /*||*/  XXXXXXX,      MS_LEFT,       MS_UP,        MS_DOWN,        MS_RGHT,
-        XXXXXXX,      KC_RALT,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  XXXXXXX,      MS_WHLL,       MS_WHLU,      MS_WHLD,        MS_WHLR,
-                                    XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  MS_BTN2,      MS_BTN1,       MS_BTN3                       
-    ),                                                                                                                                            
-																																		          
-    [3] = LAYOUT(                                                                                                                                 
-        XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
-        /*                                                                                           prev,          volup,        voldown,        next  */
-        KC_LGUI,      KC_LALT,      KC_LCTL,      KC_LSFT,      XXXXXXX,       /*||*/  XXXXXXX,      KC_MPRV,       KC_VOLU,      KC_VOLD,        KC_MNXT,
-        XXXXXXX,      KC_RALT,      XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
-        /*                                                                              stop, pl     ay, mute                                           */
-                                    XXXXXXX,      XXXXXXX,      XXXXXXX,       /*||*/  KC_MSTP,      KC_MPLY,       AU_TOGG                       
-    ),                                                                                                                                            
-																																		          
-    [4] = LAYOUT(                                                                                                                                 
-        /* numeri     c keys */                                                                                                                   
-        KC_LBRC,      KC_7,         KC_8,         KC_9,         KC_RBRC,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
-        KC_SCLN,      KC_4,         KC_5,         KC_6,         KC_EQL,        /*||*/  XXXXXXX,      KC_LSFT,       KC_LCTL,      KC_LALT,        KC_LGUI,
-        KC_GRV,       KC_1,         KC_2,         KC_3,         KC_BSLS,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,       KC_RALT,        XXXXXXX,
-                                    KC_DOT,       KC_0,         KC_MINS,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX                       
-    ),                                                                                                                                            
-																																		          
-    [5] = LAYOUT(                                                                                                                                 
-        KC_LCBR,      KC_AMPR,      KC_ASTR,      KC_LPRN,      KC_RCBR,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
-        KC_COLN,      KC_DLR,       KC_PERC,      KC_CIRC,      KC_PLUS,       /*||*/  XXXXXXX,      KC_LSFT,       KC_LCTL,      KC_LALT,        KC_LGUI,
-        KC_TILD,      KC_EXLM,      KC_AT,        KC_HASH,      KC_PIPE,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      KC_RALT,        XXXXXXX,
-                                    KC_LPRN,      KC_RPRN,      KC_UNDS,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX                       
-    ),                                                                                                                                            
-																																		          
-    [6] = LAYOUT(                                                                                                                                 
-        /* function keys */                                                                                                                       
-        KC_F12,       KC_F7,        KC_F8,        KC_F9,        KC_PSCR,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      XXXXXXX,        XXXXXXX,
-        KC_F11,       KC_F4,        KC_F5,        KC_F6,        KC_SCRL,       /*||*/  XXXXXXX,      KC_LSFT,       KC_LCTL,      KC_LALT,        KC_LGUI,
-        KC_F10,       KC_F1,        KC_F2,        KC_F3,        KC_PAUS,       /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX,      KC_RALT,        XXXXXXX,
-                                    KC_APP,       KC_SPC,       KC_TAB,        /*||*/  XXXXXXX,      XXXXXXX,       XXXXXXX
-    )
+  [NAV] = LAYOUT(
+  QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ KC_AGIN, KC_UNDO, LSFT(KC_INS), XXXXXXX,  KC_PSCR,
+  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, /*||*/ KC_CAPS, KC_LEFT, KC_UP,  KC_DOWN,  KC_RGHT,
+  XXXXXXX, LCTL(KC_X),  LCTL(KC_C),  LCTL(KC_V),  XXXXXXX, /*||*/ KC_INS, KC_HOME, KC_PGUP, KC_PGDN,  KC_END,
+  XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ KC_ENT, KC_BSPC, KC_DEL  
+  ),             
+																																		   
+  [MOUSE] = LAYOUT(            
+  /* alt,   ctrl,  shift       m ouse    */
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, /*||*/ XXXXXXX, MS_LEFT, MS_UP,  MS_DOWN,  MS_RGHT,
+  XXXXXXX, KC_RALT, XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ XXXXXXX, MS_WHLL, MS_WHLU, MS_WHLD,  MS_WHLR,
+  XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ MS_BTN2, MS_BTN1, MS_BTN3    
+  ),
+
+  [BUTTON] = LAYOUT(            
+  /* alt,   ctrl,  shift       m ouse    */
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, /*||*/ XXXXXXX, MS_LEFT, MS_UP,  MS_DOWN,  MS_RGHT,
+  XXXXXXX, KC_RALT, XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ XXXXXXX, MS_WHLL, MS_WHLU, MS_WHLD,  MS_WHLR,
+  XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ MS_BTN2, MS_BTN1, MS_BTN3    
+  ), 
+              
+																																		   
+  [MEDIA] = LAYOUT(            
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  /*        prev,   volup,  voldown,  next */
+  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, /*||*/ XXXXXXX, KC_MPRV, KC_VOLU, KC_VOLD,  KC_MNXT,
+  XXXXXXX, KC_RALT, XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  /*       stop, pl   ay, mute    */
+  XXXXXXX, XXXXXXX, XXXXXXX, /*||*/ KC_MSTP, KC_MPLY, AU_TOGG    
+  ),             
+																																		   
+  [NUM] = LAYOUT(            
+  /* numeri   c keys */          
+  KC_LBRC, KC_7,  KC_8,  KC_9,  KC_RBRC, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  KC_SCLN, KC_4,  KC_5,  KC_6,  KC_EQL,  /*||*/ XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT,  KC_LGUI,
+  KC_GRV, KC_1,  KC_2,  KC_3,  KC_BSLS, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT,  XXXXXXX,
+  KC_DOT, KC_0,  KC_MINS, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX    
+  ),             
+																																		   
+  [SYM] = LAYOUT(            
+  KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  KC_COLN, KC_DLR, KC_PERC, KC_CIRC, KC_PLUS, /*||*/ XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT,  KC_LGUI,
+  KC_TILD, KC_EXLM, KC_AT,  KC_HASH, KC_PIPE, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT,  XXXXXXX,
+  KC_LPRN, KC_RPRN, KC_UNDS, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX    
+  ),             
+																																		   
+  [FUN] = LAYOUT(            
+  /* function keys */            
+  KC_F12, KC_F7,  KC_F8,  KC_F9,  KC_PSCR, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  KC_F11, KC_F4,  KC_F5,  KC_F6,  KC_SCRL, /*||*/ XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT,  KC_LGUI,
+  KC_F10, KC_F1,  KC_F2,  KC_F3,  KC_PAUS, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT,  XXXXXXX,
+  KC_APP, KC_SPC, KC_TAB,  /*||*/ XXXXXXX, XXXXXXX, XXXXXXX
+  ),
+  
+  [ADD] = LAYOUT(            
+  /* function keys */            
+  KC_F12, KC_F7,  KC_F8,  KC_F9,  KC_PSCR, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  KC_F11, KC_F4,  KC_F5,  KC_F6,  KC_SCRL, /*||*/ XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT,  KC_LGUI,
+  KC_F10, KC_F1,  KC_F2,  KC_F3,  KC_PAUS, /*||*/ XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT,  XXXXXXX,
+   KC_APP, KC_SPC, KC_TAB,  /*||*/ XXXXXXX, XXXXXXX, XXXXXXX
+  ),
 
 };
 
