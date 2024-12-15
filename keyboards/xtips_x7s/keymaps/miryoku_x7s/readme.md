@@ -2,7 +2,8 @@
 
 based on [Gleb Peregud](https://github.com/gleber/qmk_firmware/tree/master/keyboards/xtips_x7s]) xtips x7s github
 
-![Imgur](https://imgur.com/PTDFZXI)
+![xtips_x7s](https://i.imgur.com/PTDFZXI.png)
+
 
 ## bootloader
 bootloader files in folder xtips_x7s/binaries
