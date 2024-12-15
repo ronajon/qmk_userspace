@@ -4,6 +4,9 @@ based on [Gleb Peregud](https://github.com/gleber/qmk_firmware/tree/master/keybo
 
 ![xtips_x7s](https://i.imgur.com/PTDFZXI.png)
 
+![layer reference](https://github.com/manna-harbour/miryoku/blob/master/data/layers/miryoku-kle-reference.png)
+
+
 ## bootloader
 bootloader files in folder xtips_x7s/binaries
 
