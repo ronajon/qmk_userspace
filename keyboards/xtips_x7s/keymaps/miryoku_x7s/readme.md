@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 [Miryoku](https://github.com/manna-harbour/miryoku) layout for XTIPS X7S keyboard
 
 based on [Gleb Peregud](https://github.com/gleber/qmk_firmware/tree/master/keyboards/xtips_x7s]) xtips x7s github
 
 ![Imgur](https://imgur.com/PTDFZXI)
 
+=======
+>>>>>>> 4ec5f31d9d7fe9521fb33b1dadb1cd042105880c
 ## bootloader
 bootloader files in folder xtips_x7s/binaries
 
