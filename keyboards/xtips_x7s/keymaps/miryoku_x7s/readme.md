@@ -27,3 +27,4 @@ only build miryoku_x7s keymap, default is not working
 after flashing dso138_boot20.bin, put boards in bootloader with W and O keys
 
 >`qmk flash xtips_x7s_miryoku_x7s.bin`
+
