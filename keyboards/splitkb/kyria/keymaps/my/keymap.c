@@ -65,17 +65,10 @@ enum layers {
 //Declare the functions to be used with your tap dance key(s)
 
 //Function associated with all tap dances
-<<<<<<< HEAD
 int cur_dance (tap_dance_state_t *state);
 
 //Determine the current tap dance state
 int cur_dance (tap_dance_state_t *state) {
-=======
-int cur_dance (qk_tap_dance_state_t *state);
-
-//Determine the current tap dance state
-int cur_dance (qk_tap_dance_state_t *state) {
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
   if (state->count == 1) {
     if (!state->pressed) {
       return SINGLE_TAP;
@@ -94,13 +87,8 @@ int cur_dance (qk_tap_dance_state_t *state) {
 
 // ---- ---- ---- ---- ----
 //Functions associated with COLEMAK / QWERTY
-<<<<<<< HEAD
 void clmk_toggle (tap_dance_state_t *state, void *user_data);
 void clmk_reset (tap_dance_state_t *state, void *user_data);
-=======
-void clmk_toggle (qk_tap_dance_state_t *state, void *user_data);
-void clmk_reset (qk_tap_dance_state_t *state, void *user_data);
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
 
 //Initialize tap structure associated with example tap dance key
 static tap cmlk_tap_state = {
@@ -111,11 +99,7 @@ static tap cmlk_tap_state = {
 //single tap, single hold, double tap, double tap hold
 // KC_UP    , KC_UP,     , Colemak toggle, _
 //Toggle colemak / qwerty
-<<<<<<< HEAD
 void clmk_toggle (tap_dance_state_t *state, void *user_data) {
-=======
-void clmk_toggle (qk_tap_dance_state_t *state, void *user_data) {
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
   cmlk_tap_state.state = cur_dance(state);
   switch (cmlk_tap_state.state) {
     case SINGLE_TAP:
@@ -137,11 +121,7 @@ void clmk_toggle (qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-<<<<<<< HEAD
 void clmk_reset (tap_dance_state_t *state, void *user_data) {
-=======
-void clmk_reset (qk_tap_dance_state_t *state, void *user_data) {
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
   // if key is held down it should work fine as LSFT
   if (cmlk_tap_state.state==SINGLE_HOLD) {
     tap_code(KC_LSFT);
@@ -150,13 +130,8 @@ void clmk_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 // ---- ---- ---- ---- ----
 //Functions associated with shift - ctrl tap dance
-<<<<<<< HEAD
 void shift_ctrl_toggle (tap_dance_state_t *state, void *user_data);
 void shift_ctrl_reset (tap_dance_state_t *state, void *user_data);
-=======
-void shift_ctrl_toggle (qk_tap_dance_state_t *state, void *user_data);
-void shift_ctrl_reset (qk_tap_dance_state_t *state, void *user_data);
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
 
 //Initialize tap structure associated with example tap dance key
 static tap lsft_tap_state = {
@@ -166,11 +141,7 @@ static tap lsft_tap_state = {
 
 //single tap, single hold, double tap, double tap hold
 //_         , Shift,     , _         , Ctrl
-<<<<<<< HEAD
 void shift_ctrl_toggle (tap_dance_state_t *state, void *user_data) {
-=======
-void shift_ctrl_toggle (qk_tap_dance_state_t *state, void *user_data) {
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
   lsft_tap_state.state = cur_dance(state);
   switch (lsft_tap_state.state) {
     case SINGLE_TAP:
@@ -188,11 +159,7 @@ void shift_ctrl_toggle (qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-<<<<<<< HEAD
 void shift_ctrl_reset (tap_dance_state_t *state, void *user_data) {
-=======
-void shift_ctrl_reset (qk_tap_dance_state_t *state, void *user_data) {
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
   // if key is held down it should work fine as LSFT
   if (lsft_tap_state.state==DOUBLE_HOLD) {
     tap_code(KC_LCTL);
@@ -218,11 +185,7 @@ enum {
   TD_SHIFT_CTRL,
 };
 
-<<<<<<< HEAD
 tap_dance_action_t tap_dance_actions[] = {
-=======
-qk_tap_dance_action_t tap_dance_actions[] = {
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
   // G Esc
   [TD_G_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_G, KC_ESC),
   // Alt Esc
@@ -238,15 +201,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   // ; :
   [TD_SCLN_COLN] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
   // Up CLMK / QWRT
-<<<<<<< HEAD
   [TD_UP_CLMK] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, clmk_toggle, clmk_reset),
   // Shift Shift Ctrl _
   [TD_SHIFT_CTRL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shift_ctrl_toggle, shift_ctrl_reset),
-=======
-  [TD_UP_CLMK] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, clmk_toggle, clmk_reset, 275),
-  // Shift Shift Ctrl _
-  [TD_SHIFT_CTRL] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shift_ctrl_toggle, shift_ctrl_reset, 275),
->>>>>>> 2d346612bfe1b2a08e8ea9efbef37feb61c1c96d
 };
 
 // Aliases for readability
