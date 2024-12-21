@@ -252,7 +252,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT(
 		KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5,							                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_BSLS,
 		KC_NO, KC_LCBR, KC_LPRN, KC_PIPE, KC_RPRN, KC_RCBR,				          KC_LBRC, KC_LEFT, KC_UP, KC_RGHT, KC_RBRC, KC_EQL,
-		KC_LSFT, KC_NO, KC_LBRC, KC_NO, KC_RBRC, KC_NO,	KC_NO, KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_DOWN, KC_NO, KC_NO, KC_RSFT,
+		KC_LSFT, KC_NO, KC_LBRC, KC_NO, KC_RBRC, KC_NO,	KC_NO, KC_NO,       KC_NO, KC_CAPS, KC_NUM, KC_SCRL, KC_DOWN, KC_NO, KC_NO, KC_RSFT,
 			KC_PGUP, KC_PGDN, KC_BSPC, LT(2,KC_NO), KC_LGUI,			        KC_ENT, LT(0,KC_NO), KC_SPC, KC_NO, KC_NO
 	),
 
@@ -342,9 +342,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
         // revision and keymap
-        oled_write_P(PSTR("Imfiny rev0.6a\n\n"), false);
-        oled_write_P(PSTR("#> "), false);
-
+        oled_write_P(PSTR("#> Imfiny rev0.6a\n"), false);
 
         // QMK Logo and version information
         // clang-format off
@@ -385,7 +383,7 @@ bool oled_task_user(void) {
         oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("       "), false);
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
     } else {
-        oled_write_P(PSTR("$> "), false);
+        // oled_write_P(PSTR("$> "), false);
         // clang-format off
         static const char PROGMEM kyria_logo[] = {
             0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,128,128,192,224,240,112,120, 56, 60, 28, 30, 14, 14, 14,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7, 14, 14, 14, 30, 28, 60, 56,120,112,240,224,192,128,128,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
