@@ -1,21 +1,18 @@
-# Kyria Keymap
+# Kyria's Default Keymap
 
-![KLE render of the Kyria keymap with QWERTY as the base layer. Layers are shown in sublegends.](https://i.imgur.com/KyTrXEh.png)
+![KLE render of the default Kyria keymap with QWERTY as the base layer. Layers are shown in sublegends.](https://i.ibb.co/RQZx2dY/default-kyria2.jpg)
 
 
-This keymap contains 7 layers which are based off [Miryoku](https://github.com/manna-harbour/miryoku)
+The default keymap contains 5 layers which allows it to include all keys found on an ANSI layout TKL keyboard plus media keys.
 Hardware features of the Kyria such as OLEDs, rotary encoders and underglow are also supported.
 
 The five different layers are the following:
-1. Base layer (QWERTY)
-2. Media layer
-3. Navigation layer
-4. Mouse emulator layer
-5. Symbols layer
-6. Number layer
-7. Function keys layer
+1. Base layer (QWERTY, Colemak-DH or Dvorak)
+2. Navigation layer
+3. Symbols/Numbers layer
+4. Function layer
+5. Adjust layer
 
-<!-- 
 ## Base layer(s)
 ```
 Base Layer: -
@@ -234,9 +231,10 @@ enum layers {
 ```
 or re-define the `QWERTY`, `COLEMAK` and `DVORAK` keys to point to custom keycodes starting on `SAFE_RANGE` and calling the `set_single_persistent_default_layer` function inside of `process_record_user`.
 
--->
-
 ## Hardware Features
+
+### Rotary Encoder
+The left rotary encoder is programmed to control the volume whereas the right encoder sends <kbd>PgUp</kbd> or <kbd>PgDn</kbd> on every turn.
 
 ### OLEDs
 The OLEDs display the current layer at the top of the active layers stack, the Kyria logo and lock status (caps lock, num lock, scroll lock).
