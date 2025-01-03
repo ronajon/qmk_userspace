@@ -249,3 +249,7 @@ The underglow LEDs should be red.
 This default keymap can be used as is, unchanged, as a daily driver for your Kyria but you're invited to treat your keymap like a bonsai. At the beginning, it's just like the default keymap but from time to time, you can tweak it a little. Cut a little key here, let another combo grow there. Slowly but surely it will be a unique keymap that will fit you like a glove.
 
 Check out the #keymap-ideas channel on the official SplitKB Discord server for inspiration.
+
+## Build commands
+
+make splitkb/kyria/rev1:default

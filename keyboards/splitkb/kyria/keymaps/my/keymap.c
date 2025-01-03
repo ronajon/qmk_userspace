@@ -292,11 +292,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_MED] = LAYOUT( // Media keys
   //┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐                                             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-     KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,                                              KC_NO    , KC_NO   , KC_NO   , KC_O    , KC_NO   , KC_NO   ,
+     KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,                                              UG_TOGG  , UG_NEXT , UG_HUEU , UG_SATU , UG_VALU , UG_SPDU ,
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_TAB   , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , KC_NO   ,                                              KC_NO    , KC_MPRV , KC_VOLD , KC_VOLU ,KC_MNXT  , KC_NO   ,                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
-     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,
+     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , KC_NO   , UG_PREV , UG_HUED , UG_SATD , UG_VALD , UG_SPDD ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                     KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       KC_MSTP , KC_MPLY , KC_MUTE , KC_NO   , KC_NO
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
