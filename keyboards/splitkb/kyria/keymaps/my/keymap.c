@@ -81,7 +81,8 @@ enum layers {
   _MSE,
   _SYM,
   _NUM,
-  _FUN
+  _FUN,
+  _RGB
 };
 
 //Declare the functions to be used with your tap dance key(s)
@@ -244,6 +245,7 @@ tap_dance_action_t tap_dance_actions[] = {
 #define BL_SYM   LT(_SYM, KC_ENT)
 #define BL_NUM   LT(_NUM, KC_BSPC)
 #define BL_FUN   LT(_FUN, KC_DEL)
+#define BL_RGB   LT(_RGB, KC_NO)
 
 // home row mods
 #define HR_A_GUI LGUI_T(KC_A)
@@ -284,21 +286,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_TAB   , HR_A_GUI, HR_S_ALT, HR_D_CTL, HR_F_SFT, KC_G    ,                                              KC_H     , HR_J_SFT, HR_K_CTL, HR_L_ALT, HR_S_CGU,TD(TD_QD),                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
-     KC_LSFT  , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , KC_N    , KC_M    , KC_COMM , KC_DOT  ,TD(TD_SQ), KC_RSFT ,
+     KC_LSFT  , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    , BL_RGB  , KC_LGUI ,       KC_NO   , KC_NO   , KC_N    , KC_M    , KC_COMM , KC_DOT  ,TD(TD_SQ), KC_RSFT ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                    KC_NO   , KC_NO   , BL_MED  , BL_NAV  , BL_MSE  ,       BL_SYM  , BL_NUM  , BL_FUN  , KC_NO   , KC_NO
+                                    KC_UP   , KC_DOWN , BL_MED  , BL_NAV  , BL_MSE  ,       BL_SYM  , BL_NUM  , BL_FUN  , KC_LEFT , KC_RGHT
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
   ),
 
   [_MED] = LAYOUT( // Media keys
   //┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐                                             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-     KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,                                              UG_TOGG  , UG_NEXT , UG_HUEU , UG_SATU , UG_VALU , UG_SPDU ,
+     KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,                                              KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_TAB   , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , KC_NO   ,                                              KC_NO    , KC_MPRV , KC_VOLD , KC_VOLU ,KC_MNXT  , KC_NO   ,                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
-     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , KC_NO   , UG_PREV , UG_HUED , UG_SATD , UG_VALD , UG_SPDD ,
+     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,       KC_NO   , KC_NO   , KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                    KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       KC_MSTP , KC_MPLY , KC_MUTE , KC_NO   , KC_NO
+                                    _______ , _______ , KC_NO   , KC_NO   , KC_NO   ,       KC_MSTP , KC_MPLY , KC_MUTE , _______ , _______
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
   ),
   
@@ -308,9 +310,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_TAB   , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , KC_NO   ,                                              KC_CAPS  , KC_LEFT , KC_DOWN , KC_UP   ,KC_RIGHT , KC_NO   ,                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
-     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , SF_INS  , KC_HOME , KC_PGDN , KC_PGUP , KC_END  , _______ ,
+     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,       KC_NO   , KC_NO   , SF_INS  , KC_HOME , KC_PGDN , KC_PGUP , KC_END  , _______ ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                    KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       KC_ENT , KC_BSPC  , KC_DEL  , KC_NO   , KC_NO
+                                    _______ , _______ , KC_NO   , KC_NO   , KC_NO   ,       KC_ENT , KC_BSPC  , KC_DEL  , _______ , _______
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
   ),
   
@@ -320,9 +322,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_TAB   , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , KC_NO   ,                                              KC_NO    , MS_LEFT , MS_DOWN , MS_UP   , MS_RGHT , KC_NO   ,                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
-     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , KC_NO   , MS_WHLL , MS_WHLD , MS_WHLU , MS_WHLR , _______ ,
+     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,       KC_NO   , KC_NO   , KC_NO   , MS_WHLL , MS_WHLD , MS_WHLU , MS_WHLR , _______ ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                    KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,       MS_BTN2 , MS_BTN1 , MS_BTN3 , KC_NO   , KC_NO
+                                    MS_UP   , MS_DOWN , KC_NO   , KC_NO   , KC_NO   ,       MS_BTN2 , MS_BTN1 , MS_BTN3 , MS_LEFT , MS_RGHT
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
   ),
   
@@ -334,7 +336,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      _______  , KC_TILD , KC_EXLM , KC_AT   , KC_HASH , KC_PIPE , KC_ASTR , KC_BSLS ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                    KC_NO   , KC_NO   , KC_RPRN , KC_UNDS , KC_PLUS ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO
+                                    _______ , _______ , KC_RPRN , KC_UNDS , KC_PLUS ,       KC_NO   , KC_NO   , KC_NO   , _______ , _______
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
   ),
   
@@ -344,9 +346,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_MINS  , KC_COLN , KC_4    , KC_5    , KC_6    , KC_EQL  ,                                              KC_NO    , KC_RSFT , KC_RCTL , KC_RALT , KC_RGUI , KC_NO   ,                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
-     _______  , KC_GRV  , KC_1    , KC_2    , KC_3    , KC_BSLS , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,
+     _______  , KC_GRV  , KC_1    , KC_2    , KC_3    , KC_BSLS , KC_NO   , _______ ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                    KC_NO   , KC_NO   , KC_0    , KC_MINS , KC_EQL  ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO
+                                    _______ , _______ , KC_0    , KC_MINS , KC_EQL  ,       KC_NO   , KC_NO   , KC_NO   , _______ , _______
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
   ),
   
@@ -356,18 +358,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_TAB   , KC_F11  , KC_F4   , KC_F5   , KC_F6   , KC_SCRL ,                                              KC_NO    , KC_RSFT , KC_RCTL , KC_RALT , KC_RGUI , KC_NO   ,                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
-     _______  , KC_F10  , KC_F1   , KC_F2   , KC_F3   , KC_PAUS , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,
+     _______  , KC_F10  , KC_F1   , KC_F2   , KC_F3   , KC_PAUS , KC_NO   , _______ ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                    KC_NO   , KC_NO   , KC_LGUI , KC_SPC  , KC_TAB  ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO
+                                    _______ , _______ , KC_LGUI , KC_SPC  , KC_TAB  ,       KC_NO   , KC_NO   , KC_NO   , _______ , _______
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
   ),
-};
 
-/* The default OLED and rotary encoder code can be found at the bottom of qmk_firmware/keyboards/splitkb/kyria/rev1/rev1.c
- * These default settings can be overriden by your own settings in your keymap.c
- * For your convenience, here's a copy of those settings so that you can uncomment them if you wish to apply your own modifications.
- * DO NOT edit the rev1.c file; instead override the weakly defined default functions by your own.
- */
+  [_RGB] = LAYOUT( // RGB
+  //┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐                                             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐ 
+     KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,                                              UG_TOGG  , UG_NEXT , UG_HUEU , UG_SATU , UG_VALU , UG_SPDU , 
+  //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤ 
+     KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,                                              KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,               
+  //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤ 
+     _______  , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,       KC_NO   , KC_NO   , VK_TOGG , UG_PREV , UG_HUED , UG_SATD , UG_VALD , UG_SPDD ,
+  //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘ 
+                                    _______ , _______ , KC_NO   , KC_NO   , KC_NO   ,       KC_NO   , KC_NO   , KC_NO   , _______ , _______
+  //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘ 
+  ),
+};
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
@@ -386,6 +394,9 @@ bool oled_task_user(void) {
     // clang-format on
 
     oled_write_P(qmk_logo, false);
+//    static char rgbStatusLine1[26] = {0};
+//    snprintf(rgbStatusLine1, sizeof(rgbStatusLine1), "RGB Mode: %d", rgblight_get_mode());
+//    oled_write_ln(rgbStatusLine1, false);
     oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
 
     // Host Keyboard Layer Status
@@ -411,6 +422,9 @@ bool oled_task_user(void) {
         break;
       case _FUN:
         oled_write_P(PSTR("Function\n"), false);
+        break;
+      case _RGB:
+        oled_write_P(PSTR("RGB\n"), false);
         break;
       default:
         oled_write_P(PSTR("Undefined\n"), false);
@@ -441,27 +455,3 @@ bool oled_task_user(void) {
   return false;
 }
 #endif
-
-/* DELETE THIS LINE TO UNCOMMENT (1/2)
-#ifdef ENCODER_ENABLE
-bool encoder_update_user(uint8_t index, bool clockwise) {
-
-    if (index == 0) {
-        // Volume control
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    } else if (index == 1) {
-        // Page up/Page down
-        if (clockwise) {
-            tap_code(KC_PGDN);
-        } else {
-            tap_code(KC_PGUP);
-        }
-    }
-    return false;
-}
-#endif
-DELETE THIS LINE TO UNCOMMENT (2/2) */
