@@ -15,6 +15,24 @@ The five different layers are the following:
 6. Number layer
 7. Function keys layer
 
+## Hardware Features
+
+### OLEDs
+The OLEDs display the current layer at the top of the active layers stack, the Kyria logo and lock status (caps lock, num lock, scroll lock).
+
+### Underglow
+The underglow LEDs should be red.
+
+## Going further…
+
+This default keymap can be used as is, unchanged, as a daily driver for your Kyria but you're invited to treat your keymap like a bonsai. At the beginning, it's just like the default keymap but from time to time, you can tweak it a little. Cut a little key here, let another combo grow there. Slowly but surely it will be a unique keymap that will fit you like a glove.
+
+Check out the #keymap-ideas channel on the official SplitKB Discord server for inspiration.
+
+## Build commands
+
+make splitkb/kyria/rev1:default
+
 <!-- 
 ## Base layer(s)
 ```
@@ -236,20 +254,4 @@ or re-define the `QWERTY`, `COLEMAK` and `DVORAK` keys to point to custom keycod
 
 -->
 
-## Hardware Features
 
-### OLEDs
-The OLEDs display the current layer at the top of the active layers stack, the Kyria logo and lock status (caps lock, num lock, scroll lock).
-
-### Underglow
-The underglow LEDs should be red.
-
-## Going further…
-
-This default keymap can be used as is, unchanged, as a daily driver for your Kyria but you're invited to treat your keymap like a bonsai. At the beginning, it's just like the default keymap but from time to time, you can tweak it a little. Cut a little key here, let another combo grow there. Slowly but surely it will be a unique keymap that will fit you like a glove.
-
-Check out the #keymap-ideas channel on the official SplitKB Discord server for inspiration.
-
-## Build commands
-
-make splitkb/kyria/rev1:default

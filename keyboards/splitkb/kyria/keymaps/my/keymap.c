@@ -15,33 +15,6 @@
  */
 #include QMK_KEYBOARD_H
 
-/*
-// Macro
-enum custom_keycodes {
-  M_LEFT_DESKTOP = SAFE_RANGE,
-  M_RIGHT_DESKTOP,
-};
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case M_LEFT_DESKTOP:
-      if (record->event.pressed) {
-        // switch to left desktop
-        SEND_STRING(SS_LCTL(SS_TAP(X_LEFT)));
-      }
-      break;
-    case M_RIGHT_DESKTOP:
-      if (record->event.pressed) {
-        // switch to right desktop
-        SEND_STRING(SS_LCTL(SS_TAP(X_RIGHT)));
-      }
-      break;
-
-  }
-  return true;
-};
-// --- end macro ---
-*/
 
 // declare function to detect SHIFT key pressed
 bool is_shift_pressed = false;
@@ -107,52 +80,6 @@ int cur_dance (tap_dance_state_t *state) {
   }
   else return 8;
 }
-
-/*
-// ---- ---- ---- ---- ----
-//Functions associated with COLEMAK / QWERTY
-void clmk_toggle (tap_dance_state_t *state, void *user_data);
-void clmk_reset (tap_dance_state_t *state, void *user_data);
-
-//Initialize tap structure associated with example tap dance key
-static tap cmlk_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-//single tap, single hold, double tap, double tap hold
-// KC_UP    , KC_UP,     , Colemak toggle, _
-//Toggle colemak / qwerty
-void clmk_toggle (tap_dance_state_t *state, void *user_data) {
-  cmlk_tap_state.state = cur_dance(state);
-  switch (cmlk_tap_state.state) {
-    case SINGLE_TAP:
-      tap_code(KC_UP);
-      break;
-    case SINGLE_HOLD:
-      tap_code(KC_UP);
-      break;
-    case DOUBLE_TAP:
-      //check to see if the layer is already set
-      if (layer_state_is(_COLEMAK)) {
-        //if already set, then switch it off
-        layer_off(_COLEMAK);
-      } else {
-        //if not already set, then switch the layer on
-        layer_on(_COLEMAK);
-      }
-      break;
-  }
-}
-
-
-void clmk_reset (tap_dance_state_t *state, void *user_data) {
-  // if key is held down it should work fine as LSFT
-  if (cmlk_tap_state.state==SINGLE_HOLD) {
-    tap_code(KC_LSFT);
-  }
-}
-*/
 
 // ---- ---- ---- ---- ----
 //Functions associated with shift - ctrl tap dance
@@ -260,9 +187,85 @@ tap_dance_action_t tap_dance_actions[] = {
 // shift insert
 #define SF_INS  LSFT(KC_INS)
 
-// Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
-// The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
-// produces the key `tap` when tapped (i.e. pressed and released).
+// CUT COPY PASTE
+#define M_CUT    LCTL(KC_X)
+#define M_COPY   LCTL(KC_C)
+#define M_PASTE  LCTL(KC_P)
+#define M_UNDO   LCTL(KC_Z)
+#define M_REDO   LCTL(KC_Y)
+
+// LIGHTING LAYERS
+// Light LEDs 6 to 9 and 12 to 15 red when caps lock is active. Hard to ignore!
+const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {0, 2, HSV_RED},       // Light 4 LEDs, starting with LED 6
+  {3, 1, HSV_GREEN},       // Light 4 LEDs, starting with LED 12
+  {9, 1, HSV_ORANGE},       // Light 4 LEDs, starting with LED 12
+  {13, 1, HSV_YELLOW}       // Light 4 LEDs, starting with LED 12
+);
+// Light LEDs 9 & 10 in cyan when keyboard layer 1 is active
+const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {3, 2, HSV_CYAN}
+);
+// Light LEDs 11 & 12 in purple when keyboard layer 2 is active
+const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {11, 2, HSV_BLUE}
+);
+// Light LEDs 13 & 14 in green when keyboard layer 3 is active
+const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {13, 2, HSV_PINK}
+);
+// Light LEDs 13 & 14 in green when keyboard layer 3 is active
+const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {15, 2, HSV_GOLD}
+);
+// Light LEDs 13 & 14 in green when keyboard layer 3 is active
+const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {19, 2, 128, 255, 255}
+);
+// Light LEDs 13 & 14 in green when keyboard layer 3 is active
+const rgblight_segment_t PROGMEM my_layer6_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+  {6, 4, HSV_MAGENTA}
+);
+
+
+// Now define the array of layers. Later layers take precedenceronst rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+  my_layer0_layer,
+  my_layer1_layer,    // Overrides layer0 layer
+  my_layer2_layer,    // Overrides other layers
+  my_layer3_layer,    // Overrides other layers
+  my_layer4_layer,    // Overrides other layers
+  my_layer5_layer,    // Overrides other layers
+  my_layer6_layer     // Overrides other layers
+);
+
+void keyboard_post_init_user(void) {
+    // Enable the LED layers
+    rgblight_layers = my_rgb_layers;
+}
+
+/*
+bool led_update_user(led_t led_state) {
+    rgblight_set_layer_state(0, led_state.caps_lock);
+    return true;
+}
+
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(1, layer_state_cmp(state, _QWR));
+    return state;
+}
+*/
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  rgblight_set_layer_state(0, layer_state_cmp(state, _MED));
+  rgblight_set_layer_state(1, layer_state_cmp(state, _NAV));
+  rgblight_set_layer_state(2, layer_state_cmp(state, _MSE));
+  rgblight_set_layer_state(3, layer_state_cmp(state, _SYM));
+  rgblight_set_layer_state(4, layer_state_cmp(state, _NUM));
+  rgblight_set_layer_state(5, layer_state_cmp(state, _FUN));
+  rgblight_set_layer_state(6, layer_state_cmp(state, _RGB));
+  return state;
+}
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -318,7 +321,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   [_MSE] = LAYOUT( // Mouse
   //┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐                                             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-     KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,                                              KC_AGAIN , KC_PASTE, KC_COPY , KC_CUT  , KC_UNDO , KC_NO   ,
+     KC_NO    , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   ,                                              M_REDO   , M_PASTE , M_COPY  , M_CUT   , M_UNDO  , KC_NO   ,
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_TAB   , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , KC_NO   ,                                              KC_NO    , MS_LEFT , MS_DOWN , MS_UP   , MS_RGHT , KC_NO   ,                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
