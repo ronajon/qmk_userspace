@@ -196,47 +196,28 @@ tap_dance_action_t tap_dance_actions[] = {
 
 // LIGHTING LAYERS
 // Light LEDs 6 to 9 and 12 to 15 red when caps lock is active. Hard to ignore!
-const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {0, 2, HSV_RED},       // Light 4 LEDs, starting with LED 6
-  {3, 1, HSV_GREEN},       // Light 4 LEDs, starting with LED 12
-  {9, 1, HSV_ORANGE},       // Light 4 LEDs, starting with LED 12
-  {13, 1, HSV_YELLOW}       // Light 4 LEDs, starting with LED 12
-);
-// Light LEDs 9 & 10 in cyan when keyboard layer 1 is active
-const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {3, 2, HSV_CYAN}
-);
-// Light LEDs 11 & 12 in purple when keyboard layer 2 is active
-const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {11, 2, HSV_BLUE}
-);
-// Light LEDs 13 & 14 in green when keyboard layer 3 is active
-const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {13, 2, HSV_PINK}
-);
-// Light LEDs 13 & 14 in green when keyboard layer 3 is active
-const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {15, 2, HSV_GOLD}
-);
-// Light LEDs 13 & 14 in green when keyboard layer 3 is active
-const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {19, 2, 128, 255, 255}
-);
-// Light LEDs 13 & 14 in green when keyboard layer 3 is active
-const rgblight_segment_t PROGMEM my_layer6_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  {6, 4, HSV_MAGENTA}
-);
+//  {0, 2, HSV_RED},       // Light 4 LEDs, starting with LED 6
+//  {3, 1, HSV_GREEN},       // Light 4 LEDs, starting with LED 12
+//  {9, 1, HSV_ORANGE},       // Light 4 LEDs, starting with LED 12
+//  {13, 1, HSV_YELLOW}       // Light 									4 LEDs, starting with LED 12
 
+//const rgblight_segment_t PROGMEM layer_0[] = RGBLIGHT_LAYER_SEGMENTS( {0, 1, HSV_RED}, {3, 1, HSV_GREEN}, {9, 1, HSV_ORANGE}, {13, 1, HSV_YELLOW} ); // _MED
+const rgblight_segment_t PROGMEM layer_0[] = RGBLIGHT_LAYER_SEGMENTS( {0, 20, HSV_BLUE} ); // _MED
+const rgblight_segment_t PROGMEM layer_1[] = RGBLIGHT_LAYER_SEGMENTS( {11, 1, HSV_CYAN} );  // _NAV
+//const rgblight_segment_t PROGMEM layer_2[] = RGBLIGHT_LAYER_SEGMENTS( {0, 10, HSV_BLUE} ); // _MSE 0,10 works for right hand
+const rgblight_segment_t PROGMEM layer_2[] = RGBLIGHT_LAYER_SEGMENTS( {0, 10, HSV_GOLD} ); // _MSE
+const rgblight_segment_t PROGMEM layer_3[] = RGBLIGHT_LAYER_SEGMENTS( {4, 12, HSV_PINK} ); // _SYM
+const rgblight_segment_t PROGMEM layer_4[] = RGBLIGHT_LAYER_SEGMENTS( {15, 2, HSV_GOLD} ); // _NUM
+const rgblight_segment_t PROGMEM layer_5[] = RGBLIGHT_LAYER_SEGMENTS( {19, 2, HSV_YELLOW} ); //_FUN
 
 // Now define the array of layers. Later layers take precedenceronst rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-  my_layer0_layer,
-  my_layer1_layer,    // Overrides layer0 layer
-  my_layer2_layer,    // Overrides other layers
-  my_layer3_layer,    // Overrides other layers
-  my_layer4_layer,    // Overrides other layers
-  my_layer5_layer,    // Overrides other layers
-  my_layer6_layer     // Overrides other layers
+  layer_0,
+  layer_1,    // Overrides layer0 layer
+  layer_2,    // Overrides other layers
+  layer_3,    // Overrides other layers
+  layer_4,    // Overrides other layers
+  layer_5    // Overrides other layers
 );
 
 void keyboard_post_init_user(void) {
@@ -263,7 +244,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   rgblight_set_layer_state(3, layer_state_cmp(state, _SYM));
   rgblight_set_layer_state(4, layer_state_cmp(state, _NUM));
   rgblight_set_layer_state(5, layer_state_cmp(state, _FUN));
-  rgblight_set_layer_state(6, layer_state_cmp(state, _RGB));
   return state;
 }
 

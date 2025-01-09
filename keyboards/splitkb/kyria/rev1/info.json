@@ -15,7 +15,10 @@
     },
     "rgblight": {
         "led_count": 20,
-        "split_count": [10, 10]
+        "split_count": [10, 10],
+        "layers": {
+			"enabled": true
+		}
     },
     "rgb_matrix": {
         "driver": "ws2812",
