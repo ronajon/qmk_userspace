@@ -17,6 +17,9 @@
 
 
 // declare function to detect SHIFT key pressed
+//bool is_super_pressed = false;
+//bool is_alt_pressed = false;
+//bool is_ctrl_pressed = false;
 bool is_shift_pressed = false;
 
 // Process keycode to detect Shift press/release
@@ -329,7 +332,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                             ├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
      KC_MINS  , KC_COLN , KC_4    , KC_5    , KC_6    , KC_EQL  ,                                              KC_NO    , KC_RSFT , KC_RCTL , KC_RALT , KC_RGUI , KC_NO   ,                    
   //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┬─────────┐     ┌─────────┬─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤─────────┤
-     _______  , KC_GRV  , KC_1    , KC_2    , KC_3    , KC_BSLS , KC_NO   , _______ ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,
+     _______  , KC_GRV  , KC_1    , KC_2    , KC_3    , KC_BSLS , KC_NO   , KC_NUM  ,       KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , KC_NO   , _______ ,
   //└─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼─────────┬─────────┤     ├─────────┬─────────┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                     _______ , _______ , KC_0    , KC_MINS , KC_EQL  ,       KC_NO   , KC_NO   , KC_NO   , _______ , _______
   //                              └─────────┴─────────┴─────────┴─────────┴─────────┘     └─────────┴─────────┴─────────┴─────────┴─────────┘
@@ -364,24 +367,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
 
 bool oled_task_user(void) {
+  led_t led_usb_state = host_keyboard_led_state();
   if (is_keyboard_master()) {
-    // revision and keymap
-    //oled_write_P(PSTR("#> ronajon rev0.6a\n"), false);
-
-    // QMK Logo and version information
-    // clang-format off
-    static const char PROGMEM qmk_logo[] = {
-      0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
-      0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
-      0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0};
-    // clang-format on
-
-    oled_write_P(qmk_logo, false);
-//    static char rgbStatusLine1[26] = {0};
-//    snprintf(rgbStatusLine1, sizeof(rgbStatusLine1), "RGB Mode: %d", rgblight_get_mode());
-//    oled_write_ln(rgbStatusLine1, false);
-    oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
-
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state|default_layer_state)) {
@@ -412,16 +399,30 @@ bool oled_task_user(void) {
       default:
         oled_write_P(PSTR("Undefined\n"), false);
     }
-
-    // Write host Keyboard LED Status to OLEDs
-    led_t led_usb_state = host_keyboard_led_state();
+    
     oled_write_P(led_usb_state.num_lock  ? PSTR("NUMLCK ") : PSTR("     "), false);
     oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("     "), false);
     oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("     "), false);
-    oled_write_P(is_shift_pressed ? PSTR("SHFT ") : PSTR("     "), false);
+    oled_write_P(is_shift_pressed ? PSTR("\n\nSHFT ") : PSTR("\n\n     "), false);
   } else {
-    // oled_write_P(PSTR("$> "), false);
-    // clang-format off
+    // QMK Logo and version information
+    static const char PROGMEM qmk_logo[] = {
+      0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
+      0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
+      0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0};
+
+    oled_write_P(qmk_logo, false);
+    oled_write_P(PSTR("Kyria rev1.1\n\n"), false);
+    
+    // Get the current RGB mode
+    //uint8_t rgb_mode = rgblight_get_mode();
+    //oled_write(char('0' + rgb_mode), false);
+  }
+  return false;
+}
+#endif
+
+    /*
     static const char PROGMEM kyria_logo[] = {
       0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,128,128,192,224,240,112,120, 56, 60, 28, 30, 14, 14, 14,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7, 14, 14, 14, 30, 28, 60, 56,120,112,240,224,192,128,128,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
       0,  0,  0,  0,  0,  0,  0,192,224,240,124, 62, 31, 15,  7,  3,  1,128,192,224,240,120, 56, 60, 28, 30, 14, 14,  7,  7,135,231,127, 31,255,255, 31,127,231,135,  7,  7, 14, 14, 30, 28, 60, 56,120,240,224,192,128,  1,  3,  7, 15, 31, 62,124,240,224,192,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -434,7 +435,60 @@ bool oled_task_user(void) {
     };
     // clang-format on
     oled_write_raw_P(kyria_logo, sizeof(kyria_logo));
-  }
-  return false;
-}
-#endif
+    
+    oled_write_P(PSTR("#> ronajon rev0.6a\n\n"), false);
+    // Write host Keyboard LED Status to OLEDs
+    oled_write_P(led_usb_state.num_lock  ? PSTR("NUMLCK ") : PSTR("     "), false);
+    oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("     "), false);
+    oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("     "), false);
+    oled_write_P(is_shift_pressed ? PSTR("SHFT ") : PSTR("     "), false);
+    */
+    
+/*
+|-----------------|-----------------------------------|
+| old mode number | new mode name                     |
+|-----------------|-----------------------------------|
+|        1        | RGBLIGHT_MODE_STATIC_LIGHT        |
+|        2        | RGBLIGHT_MODE_BREATHING           |
+|        3        | RGBLIGHT_MODE_BREATHING + 1       |
+|        4        | RGBLIGHT_MODE_BREATHING + 2       |
+|        5        | RGBLIGHT_MODE_BREATHING + 3       |
+|        6        | RGBLIGHT_MODE_RAINBOW_MOOD        |
+|        7        | RGBLIGHT_MODE_RAINBOW_MOOD + 1    |
+|        8        | RGBLIGHT_MODE_RAINBOW_MOOD + 2    |
+|        9        | RGBLIGHT_MODE_RAINBOW_SWIRL       |
+|       10        | RGBLIGHT_MODE_RAINBOW_SWIRL + 1   |
+|       11        | RGBLIGHT_MODE_RAINBOW_SWIRL + 2   |
+|       12        | RGBLIGHT_MODE_RAINBOW_SWIRL + 3   |
+|       13        | RGBLIGHT_MODE_RAINBOW_SWIRL + 4   |
+|       14        | RGBLIGHT_MODE_RAINBOW_SWIRL + 5   |
+|       15        | RGBLIGHT_MODE_SNAKE               |
+|       16        | RGBLIGHT_MODE_SNAKE + 1           |
+|       17        | RGBLIGHT_MODE_SNAKE + 2           |
+|       18        | RGBLIGHT_MODE_SNAKE + 3           |
+|       19        | RGBLIGHT_MODE_SNAKE + 4           |
+|       20        | RGBLIGHT_MODE_SNAKE + 5           |
+|       21        | RGBLIGHT_MODE_KNIGHT              |
+|       22        | RGBLIGHT_MODE_KNIGHT + 1          |
+|       23        | RGBLIGHT_MODE_KNIGHT + 2          |
+|       24        | RGBLIGHT_MODE_CHRISTMAS           |
+|       25        | RGBLIGHT_MODE_STATIC_GRADIENT     |
+|       26        | RGBLIGHT_MODE_STATIC_GRADIENT + 1 |
+|       27        | RGBLIGHT_MODE_STATIC_GRADIENT + 2 |
+|       28        | RGBLIGHT_MODE_STATIC_GRADIENT + 3 |
+|       29        | RGBLIGHT_MODE_STATIC_GRADIENT + 4 |
+|       30        | RGBLIGHT_MODE_STATIC_GRADIENT + 5 |
+|       31        | RGBLIGHT_MODE_STATIC_GRADIENT + 6 |
+|       32        | RGBLIGHT_MODE_STATIC_GRADIENT + 7 |
+|       33        | RGBLIGHT_MODE_STATIC_GRADIENT + 8 |
+|       34        | RGBLIGHT_MODE_STATIC_GRADIENT + 9 |
+|       35        | RGBLIGHT_MODE_RGB_TEST            |
+|       36        | RGBLIGHT_MODE_ALTERNATING         |
+|       37        | RGBLIGHT_MODE_TWINKLE             |
+|       38        | RGBLIGHT_MODE_TWINKLE + 1         |
+|       39        | RGBLIGHT_MODE_TWINKLE + 2         |
+|       40        | RGBLIGHT_MODE_TWINKLE + 3         |
+|       41        | RGBLIGHT_MODE_TWINKLE + 4         |
+|       42        | RGBLIGHT_MODE_TWINKLE + 5         |
+|-----------------|-----------------------------------|
+*/
