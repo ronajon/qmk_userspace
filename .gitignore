@@ -15,3 +15,7 @@ compile_commands.json
 .clangd/
 .cache/
 keymap_my.json
+
+# unignore specific directories
+!keyboards/xtips_x7s/binaries/*
+!keyboards/splitkb/kyria/binaries/*
