@@ -62,6 +62,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         report.y = deltas[(phase + 8) & 31];
         phase = (phase + 1) & 31;
         host_mouse_send(&report);
+        tap_code(KC_NO);
         return 16;  // Call the callback every 16 ms.
       }
 
